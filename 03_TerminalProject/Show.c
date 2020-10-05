@@ -150,6 +150,9 @@ void curses_stuff(char **win, Lines lines) {
     int rel_cursor_row = cursor_row - top_offset;
     int rel_cursor_col = cursor_col - left_offset;
 
+    fprintf(log_file, "before modification: relative cursor row %d, column %d\n", rel_cursor_row, rel_cursor_col);
+    fprintf(log_file, "text rows %d, text cols %d\n", text_rows, text_cols);
+
     if (rel_cursor_row >= text_rows) {
       new_top_offset += text_rows;
       rel_cursor_row = cursor_row - new_top_offset;
@@ -158,10 +161,10 @@ void curses_stuff(char **win, Lines lines) {
       rel_cursor_row = cursor_row - new_top_offset;
     }
     if (rel_cursor_col >= text_cols) {
-      new_left_offset += text_cols;
+      new_left_offset += text_cols * (rel_cursor_col / text_cols);
       rel_cursor_col = cursor_col - new_left_offset;
     } else if (rel_cursor_col < 0) {
-      new_left_offset -= text_cols;
+      new_left_offset += text_cols * ((rel_cursor_col+1) / text_cols - 1);
       rel_cursor_col = cursor_col - new_left_offset;
     }
 
