@@ -6,6 +6,7 @@
 #include <locale.h>
 #include <string.h>
 #include <pcre2.h>
+#include "config.h"
 
 void init_curses() {
   setlocale(LC_ALL, "");
@@ -99,7 +100,13 @@ void output_result(windows wnd) {
   int errnum;
   PCRE2_SIZE erroffs;
 
-  pcre2_code *re = pcre2_compile(pattern, PCRE2_ZERO_TERMINATED, PCRE2_UCP, &errnum, &erroffs, NULL);
+  pcre2_code *re = pcre2_compile(pattern, PCRE2_ZERO_TERMINATED, 
+#ifdef UTF
+    PCRE2_UCP,
+#else
+    PCRE2_NEVER_UCP,
+#endif
+    &errnum, &erroffs, NULL);
 
   if (re == NULL) {
     PCRE2_UCHAR buffer[256];
