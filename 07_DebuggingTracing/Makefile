@@ -12,7 +12,7 @@ test: wrapper.so
 	ls
 	touch fooFIX foo
 	ls
-	-LD_PRELOAD=wrapper.so rm foo fooFIX
+	-LD_LIBRARY_PATH=.:$LD_LIBRARY_PATH LD_PRELOAD=wrapper.so rm foo fooFIX
 	echo 'Deleted only one'
 	ls
 	rm fooFIX
