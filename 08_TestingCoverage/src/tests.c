@@ -161,49 +161,6 @@ main(int argc, char **argv)
     TEST("size 0 (pop)", buf_size(a) == 0);
     buf_free(a);
 
-    /* Memory allocation failures */
-
-    volatile int aborted;
-
-    {
-        int *volatile p = 0;
-        aborted = 0;
-        if (!setjmp(escape)) {
-            size_t max = (PTRDIFF_MAX - sizeof(struct buf)) / sizeof(*p) + 1;
-            buf_grow(p, max);
-            buf_grow(p, max);
-        } else {
-            aborted = 1;
-        }
-        buf_free(p);
-        TEST("out of memory", aborted);
-    }
-
-    {
-        int *volatile p = 0;
-        aborted = 0;
-        if (!setjmp(escape)) {
-            buf_trunc(p, PTRDIFF_MAX);
-        } else {
-            aborted = 1;
-        }
-        buf_free(p);
-        TEST("overflow init", aborted);
-    }
-
-    {
-        int *volatile p = 0;
-        aborted = 0;
-        if (!setjmp(escape)) {
-            buf_trunc(p, 1); /* force realloc() use next */
-            buf_trunc(p, PTRDIFF_MAX);
-        } else {
-            aborted = 1;
-        }
-        buf_free(p);
-        TEST("overflow grow", aborted);
-    }
-
     printf("%d fail, %d pass\n", count_fail, count_pass);
     return count_fail != 0;
 }
