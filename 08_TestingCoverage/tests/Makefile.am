@@ -1,6 +1,6 @@
 TESTS = stest
 check_PROGRAMS = stest
-CFLAGS = @CHECK_CFLAGS@
+CFLAGS = @CHECK_CFLAGS@ -I../src
 LDADD = $(top_builddir)/src/libbuf.la @CHECK_LIBS@
 
 .ts.c:

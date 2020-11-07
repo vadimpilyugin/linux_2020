@@ -1,4 +1,4 @@
 SUBDIRS = src tests
 
-gitlcean: maintainer-clean
+gitclean: maintainer-clean
 	git clean -fd
