@@ -4,6 +4,7 @@
 AC_PREREQ([2.69])
 AC_INIT([libbuf], [0.0.0.1], [vadim_pilyugin@mail.ru])
 AM_INIT_AUTOMAKE([foreign])
+PKG_CHECK_MODULES([CHECK],[check])
 LT_INIT([disable-static])
 
 AC_CONFIG_SRCDIR([src/tests.c])
@@ -30,5 +31,5 @@ AC_FUNC_MALLOC
 AC_FUNC_REALLOC
 AC_CHECK_FUNCS([gettimeofday strtoull])
 
-AC_CONFIG_FILES([Makefile src/Makefile])
+AC_CONFIG_FILES([Makefile src/Makefile tests/Makefile])
 AC_OUTPUT
