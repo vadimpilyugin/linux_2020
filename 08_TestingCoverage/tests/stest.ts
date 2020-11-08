@@ -129,11 +129,11 @@ uepoch(void)
   ck_assert_int_eq(buf_capacity(ai), 100);
   buf_free(ai);
 #test buf_pop
-  long *a = 0;
+  float *a = 0;
   buf_push(a, 1.1);
   buf_push(a, 1.2);
   buf_push(a, 1.3);
-  buf_push(a, 1.4);
+  buf_push(a, (float)1.4f);
   ck_assert_int_eq(buf_size(a), 4);
   ck_assert_float_eq(buf_pop(a), (float)1.4f);
   buf_trunc(a, 3);

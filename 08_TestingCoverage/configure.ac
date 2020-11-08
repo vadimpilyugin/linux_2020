@@ -7,7 +7,7 @@ AM_INIT_AUTOMAKE([foreign])
 PKG_CHECK_MODULES([CHECK],[check])
 LT_INIT([disable-static])
 
-AC_CONFIG_SRCDIR([src/tests.c])
+AC_CONFIG_SRCDIR([src/libbuf.c])
 AC_CONFIG_HEADERS([config.h])
 
 # Checks for programs.
@@ -30,13 +30,12 @@ AC_CHECK_TYPES([ptrdiff_t])
 AC_FUNC_MALLOC
 AC_FUNC_REALLOC
 AC_CHECK_FUNCS([gettimeofday strtoull])
+
+AC_ARG_ENABLE([gcov],
+  [AS_HELP_STRING([--enable-gcov],[use Gcov to test the test suite])],
+  [enable_gcov=yes],
+  [enable_gcov=no])
+AM_CONDITIONAL([COND_GCOV],[true])
+
 AC_CONFIG_FILES([Makefile src/Makefile tests/Makefile])
-
-AC_ARG_ENABLE([gcov], 
-	[AS_HELP_STRING([--enable-gcov],
-	[use Gcov to test the suite])],
-	[],
-	[enable_gcov=no])
-AM_CONDITIONAL([COND_GCOV], [test '!' "$enable_gcov" = no])
-
 AC_OUTPUT
