@@ -11,5 +11,4 @@ retranslate:
 	msgmerge ru.po guess.pot -o ru.po
 	vim ru.po
 	mkdir -p ru_RU/LC_MESSAGES
-	cp ru.po ru_RU/LC_MESSAGES/guess.po
-
+	msgfmt ru.po -o ru_RU/LC_MESSAGES/guess.mo
