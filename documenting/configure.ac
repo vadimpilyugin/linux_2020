@@ -4,6 +4,7 @@
 AC_PREREQ([2.69])
 AC_INIT([libbuf], [0.0.0.1], [vadim_pilyugin@mail.ru])
 AM_INIT_AUTOMAKE([foreign])
+DX_INIT_DOXYGEN([libbuf])
 PKG_CHECK_MODULES([CHECK],[check])
 LT_INIT([disable-static])
 
@@ -37,5 +38,5 @@ AC_ARG_ENABLE([gcov],
   [enable_gcov=no])
 AM_CONDITIONAL([COND_GCOV],[true])
 
-AC_CONFIG_FILES([Makefile src/Makefile tests/Makefile])
+AC_CONFIG_FILES([Doxyfile Makefile src/Makefile tests/Makefile])
 AC_OUTPUT
