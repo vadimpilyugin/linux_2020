@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Guessing 0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-11-30 21:54+0300\n"
+"POT-Creation-Date: 2020-11-30 23:18+0300\n"
 "PO-Revision-Date: 2020-11-30 17:04+0300\n"
 "Last-Translator: vadim <vadim@vadim-tm1612>\n"
 "Language-Team: Russian\n"
@@ -18,34 +18,62 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
 "%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
-#: guessing_game.c:69
+#: guessing_game.c:11
+#,
+msgid ""
+"Guessing game is a game to guess a number from a range\n"
+"Usage: guessing_game [OPTION]\n"
+"  -r         use roman numerals instead of arabic\n"
+"  --help     print this help, then exit\n"
+"  --version  print version number, then exit\n"
+"\n"
+"In this game you think of a number in a given range, then\n"
+"answer questions like 'Is this number bigger than some other\n"
+"number?'. The goal is to guess your number while asking as few\n"
+"questions as possible.\n"
+msgstr ""
+"Игра по отгадыванию числа из непрерывного отрезка\n"
+"Использование: guessing_game [ПАРАМЕТР]\n"
+"  -r        использовать римские цифры вместо арабских\n"
+"  --help    напечатать это сообщение\n"
+"  --version напечатать версию\n"
+"\n"
+"В этой игре игрок загадывает число из определенного отрезка,\n"
+"и отвечает на вопросы вроде 'Это число больше, чем вот такое\n"
+"число?'. Цель игры - отгадать число, задавая наименьшее число\n"
+"вопросов\n"
+
+#: guessing_game.c:115
 #, c-format
 msgid "Think of a number between %s "
 msgstr "Загадай число от %s "
 
-#: guessing_game.c:70
+#: guessing_game.c:116
 #, c-format
 msgid "and %s\n"
 msgstr "до %s\n"
 
-#: guessing_game.c:74
+#: guessing_game.c:120
 #, c-format
 msgid "Is your number greater than %s (%s/%s): "
 msgstr "Число больше, чем %s (%s/%s): "
 
-#: guessing_game.c:74 guessing_game.c:76
+#: guessing_game.c:120 guessing_game.c:122
 msgid "yes"
 msgstr "да"
 
-#: guessing_game.c:74
+#: guessing_game.c:120
 msgid "no"
 msgstr "нет"
 
-#: guessing_game.c:76
+#: guessing_game.c:122
 msgid "y"
 msgstr "д"
 
-#: guessing_game.c:83
+#: guessing_game.c:129
 #, c-format
 msgid "Your number is %s\n"
 msgstr "Ваше число %s\n"
+
+#~ msgid "Hello, singlestring\n"
+#~ msgstr "Тевирп, однострочный\n"

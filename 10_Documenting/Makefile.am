@@ -1,6 +1,8 @@
 AM_CFLAGS = -Wall -Werror -Wpedantic -Wno-unused-result
 bin_PROGRAMS=guessing_game
 
+@DX_RULES@
+
 .PHONY: allclean
 allclean:
 	git clean -fd

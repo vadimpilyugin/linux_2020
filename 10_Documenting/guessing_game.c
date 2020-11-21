@@ -1,3 +1,5 @@
+/// @file
+
 #include <stdio.h>
 #include <libintl.h>
 #include <locale.h>
@@ -6,17 +8,47 @@
 #include "config.h"
 
 #define _(STRING) gettext(STRING)
+#define HELP _("Guessing game is a game to guess a number from a range\n\
+Usage: guessing_game [OPTION]\n\
+  -r         use roman numerals instead of arabic\n\
+  --help     print this help, then exit\n\
+  --version  print version number, then exit\n\
+\n\
+In this game you think of a number in a given range, then\n\
+answer questions like 'Is this number bigger than some other\n\
+number?'. The goal is to guess your number while asking as few\n\
+questions as possible.\n\
+")
 
+/**
+* Maximum number in guessing game
+*/
 #define MAXNUM 100
+
 #define FALSE 0
 #define TRUE 1
 
+/**
+* String array containing roman numerals from 1 to 100
+*/
 const char *romans[] = {"I","II","III","IV","V","VI","VII","VIII","IX","X","XI","XII","XIII","XIV","XV","XVI","XVII","XVIII","XIX","XX","XXI","XXII","XXIII","XXIV","XXV","XXVI","XXVII","XXVIII","XXIX","XXX","XXXI","XXXII","XXXIII","XXXIV","XXXV","XXXVI","XXXVII","XXXVIII","XXXIX","XL","XLI","XLII","XLIII","XLIV","XLV","XLVI","XLVII","XLVIII","XLIX","L","LI","LII","LIII","LIV","LV","LVI","LVII","LVIII","LIX","LX","LXI","LXII","LXIII","LXIV","LXV","LXVI","LXVII","LXVIII","LXIX","LXX","LXXI","LXXII","LXXIII","LXXIV","LXXV","LXXVI","LXXVII","LXXVIII","LXXIX","LXXX","LXXXI","LXXXII","LXXXIII","LXXXIV","LXXXV","LXXXVI","LXXXVII","LXXXVIII","LXXXIX","XC","XCI","XCII","XCIII","XCIV","XCV","XCVI","XCVII","XCVIII","XCIX","C"};
 
+
+/**
+* Find roman numeral corresponding to integer @p x
+* @param x Integer
+* @returns Roman numeral corresponding to @p x
+*/
 const char *to_roman(int x) {
   return romans[x-1];
 }
 
+
+/**
+* Find integer corresponding to roman numeral @p roman
+* @param roman String containing roman numeral
+* @returns Corresponding integer on success, -1 on failure
+*/
 int from_roman(const char *roman) {
   for (int i = 0; i < MAXNUM; i++)
     if (!strcmp(roman, romans[i]))
@@ -24,8 +56,9 @@ int from_roman(const char *roman) {
   return -1;
 }
 
+
 void show_help() {
-  printf("Hello, world!\n");
+  printf("%s", HELP);
   exit(0);
 }
 
@@ -34,9 +67,22 @@ void show_version() {
   exit(0);
 }
 
+/**
+* Flag that switches between roman numerals and integers
+* If flag is TRUE, then output roman numerals
+*/
 int is_roman;
+
+/**
+* Buffer holding representaions of numbers
+*/
 char buf[1024];
 
+/**
+* Write @p x to buffer @p buf and return @p buf
+* @param x Integer to write
+* @returns Buffer @p buf containing string representation of @p x depending on flag @p is_roman
+*/
 const char *to_s(int x) {
   if (is_roman)
     return to_roman(x);
@@ -47,6 +93,10 @@ const char *to_s(int x) {
 }
 
 int main(int argc, char **argv) {
+
+  setlocale(LC_ALL, "");
+  bindtextdomain("guess", ".");
+  textdomain("guess");
 
   is_roman = FALSE;
 
@@ -59,10 +109,6 @@ int main(int argc, char **argv) {
       is_roman = TRUE;
     }
   }
-
-  setlocale(LC_ALL, "");
-  bindtextdomain("guess", ".");
-  textdomain("guess");
   char buf[1024];
   int left = 1;
   int right = MAXNUM;
