@@ -2,13 +2,19 @@
 #include <libintl.h>
 #include <locale.h>
 #include <stdlib.h>
+#include <libgen.h>
 #include <string.h>
 
 #define _(STRING) gettext(STRING)
 
-int main() {
+int main(int argc, char **argv) {
+  #ifdef LOCALEDIR
+  char *dir = LOCALEDIR;
+  #else
+  char *dir = dirname(realpath(argv[0], NULL));
+  #endif
   setlocale(LC_ALL, "");
-  bindtextdomain("guess", ".");
+  bindtextdomain("guess", dir);
   textdomain("guess");
   char buf[1024];
   int left = 1;
